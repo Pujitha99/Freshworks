@@ -1,0 +1,65 @@
+<html>
+
+<head> 
+<title> country </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<center>
+
+<h1>WELCOME TO COUNTRY EXPLORER</h1>
+
+<form name="form1">
+
+<p><b><h3> Enter the country name </h3></b></p>
+<input type="text" name="country" placeholder="search.."/>
+<button onclick='myfunction(); return false'> search </button>
+
+</form>
+</center>
+
+<script language="javascript">
+function myfunction()
+{
+var str=document.form1.country.value;
+const url="https://restcountries.eu/rest/v2/name/"+str;
+ fetch(url)
+ .then(handleErrors)
+ .then((resp)=>resp.json())
+ .then(function(data) {
+ 
+     for(i in data) 
+	 {
+	    var main=document.createElement("div");
+		var main2 = document.createElement("div");
+		var div=document.createElement("div");
+		var a= document.createElement("A");
+		
+		div.className="main";
+		
+		var node = document.createElement("hi");
+		var textnode=document.createElement(data[i].name);
+		
+	     node.appendChild(textnode);
+	     div.appendChild(node);
+		 a.appendChild(div);
+		 div.appendChild(main2);
+		 document.body.appendChild(main);
+		 main2.style.backgroundImage="url("+data[i].flag+")";
+		 main2.style.backgroundPosition="center";
+		 main2.style.backgroundRepeat="noRepeat";
+		 main2.style.backgroundSize="cover";
+		 main2.style.height="100px";
+		 
+		 
+	  }	 
+ })
+.catch(function(error){
+console.log(error);
+});
+}
+</script>
+</body>
+</html>
+
